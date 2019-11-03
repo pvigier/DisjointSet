@@ -25,7 +25,7 @@ namespace ds
 class DisjointSets
 {
 public:
-    DisjointSets(std::size_t size) : mNodes(size)
+    DisjointSets(std::size_t size) : mNodes(size), mNbSets(size)
     {
         for (auto i = std::size_t(0); i < mNodes.size(); ++i)
         {
@@ -70,7 +70,7 @@ public:
                 if (rootX.rank == rootY.rank)
                     ++rootX.rank;
             }
-            
+            --mNbSets; 
         }
     }
 
@@ -84,9 +84,14 @@ public:
         return mNodes.size();
     }
 
-    std::size_t getSize(std::size_t x) const
+    std::size_t getSetSize(std::size_t x) const
     {
         return mNodes[find(x)].size;
+    }
+
+    std::size_t getNbSets() const
+    {
+        return mNbSets;
     }
 
 private:
@@ -98,6 +103,7 @@ private:
     };
 
     mutable std::vector<Node> mNodes;
+    std::size_t mNbSets;
 };
 
 }

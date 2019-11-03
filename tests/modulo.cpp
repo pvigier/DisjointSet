@@ -35,8 +35,9 @@ int main(int argc, char* argv[])
     {
         assert(disjointSets.same(i % modulo, i));
         assert(disjointSets.find(i) == i % modulo);
-        assert(disjointSets.getSize(i) == size / modulo + (size % modulo > i % modulo ? 1 : 0));
+        assert(disjointSets.getSetSize(i) == size / modulo + (size % modulo > i % modulo ? 1 : 0));
     }
+    assert(disjointSets.getNbSets() == modulo);
 
     return 0;
 }
